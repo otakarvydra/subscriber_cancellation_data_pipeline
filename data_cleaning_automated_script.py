@@ -110,7 +110,9 @@ def remove_struc_missing_data(students_df):
     students_df['time_spent_hrs'] = students_df.apply(inpute_time_spent_hrs, axis = 1)
 remove_struc_missing_data(students_df)
 
+    #Other Missing Data in any column
 def remove_other_missing_data(students_df):
+    missing_dfs = {}
     missing_df = ep.viewna_all(students_df)
     columns_missing = missing_df[missing_df['missing count'] > 0].reset_index(drop = True)
     if len(columns_missing) == 0:
@@ -120,14 +122,46 @@ def remove_other_missing_data(students_df):
         print('after automatically removing structurally missing data between current_career_path_id and time_spent_hrs, these columns still posses missing data:')
         print(columns_missing)
 
-    input = ('what column do you wish to investigate first? (to exit press e)')
-    if input.lower() == 'e':
-        return
+    while True:
+        missing_df = ep.viewna_all(students_df)
+        print(missing_df)
+        input_1 = input('what column do you wish to investigate? (to exit press e) ')
+        if input_1.lower() == 'e':
+            break
 
-    try:
-        pass
-    except ValueError:
-        pass
+        try:
+            students_df[input_1]
+        except KeyError:
+            continue
+
+        while True:
+            print('Investigating column ' + input_1)
+            input_2 = input('''insert column to generate a dataframe that shows the sum of missing data values grouped by the values in the provided column - to exit press e
+the available columns are: 'uuid', 'name', 'dob', 'age', 'sex', 'email', 'street', 'city', 'state', 'postcode', 'job_id', 'num_course_taken', 'current_career_path_id', 'time_spent_hrs' ''')
+            if input_2.lower() == 'e':
+                break
+            try:
+                print('results for ' + input_2)    
+                print(ep.viewna_column(students_df, input_1, input_2))         
+            except KeyError:
+                print('invalid column name provided')
+                continue
+            
+        while True:
+            input_3 = input('Do you wish to drop the rows containing the missing values? y/n ')
+            if input_3.lower() == 'y':
+                empty_values_df = students_df[students_df[input_1].isnull() == True]
+                missing_dfs[input_1] = empty_values_df
+                students_df = students_df.dropna(subset=input_1)
+                break
+            if input_3.lower() == 'n':
+                break
+            else:
+                print('invalid value provided')
+                continue
     
-    
-remove_other_missing_data(students_df)
+    return (students_df, missing_dfs)
+
+(students_df, missing_dfs) = remove_other_missing_data(students_df)
+
+print(students_df.info())
