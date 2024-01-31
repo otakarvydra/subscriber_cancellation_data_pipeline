@@ -11,19 +11,19 @@ The pipeline that is being built connects to the database, fetches the data, cle
 ### Detailed Pipeline Description
 
 There are three tables in the database:
-    students - includes information about the students who cancelled their subscription
-    jobs - includes information about the jobs students had
-    paths - includes information about the study paths the students were enrolled in 
+
+1. **students** - includes information about the students who cancelled their subscription
+2. **jobs** - includes information about the jobs students had
+3. **paths** - includes information about the study paths the students were enrolled in 
 
 #### Folder Structure:
 
-databases - This includes the source database. Two sqlite3 files are included. Cademycode_updated includes 1000 more cancelled subscribers than cademycode and is used to check the functionality of the pipeline in question. The folder also includes a script for viewing the individual databases. 
-dev - This includes all of the data manipulation and cleaning scripts. 
-dropped_data_log - This includes files with dropped data. 
-prod - This includes the final data warehouse, a script that was used to create it and a script that views it.
-script.sh - This is a bash script that automates the execution of the python scripts in the dev folder. 
-Data Warehouse Diagram - Includes a diagram of the data warehouse.
-Database Diagram - Includes a diagram of the initial database.
+1. **databases** - This includes the source database. Two sqlite3 files are included. Cademycode_updated includes 1000 more cancelled subscribers than cademycode and is used to check the functionality of the pipeline in question. The folder also includes a script for viewing the individual databases. 
+2. **dev** - This includes all of the data manipulation and cleaning scripts. 
+3. **diagrams** - This includes three diagrams helping to explain the project.
+4. **dropped_data_log** - This includes files with dropped data. 
+5. **prod** - This includes the final data warehouse, a script that was used to create it and a script that views it.
+6. **script.sh** - This is a bash script that automates the execution of the python scripts in the dev folder. 
 
 #### Process:
 
@@ -43,10 +43,10 @@ The students dimension never changes, therefore it is considered to be SCD of ty
 
 The Warehouse structure is shown below
 
-![Alt text](diagrams/Data_Warehouse_Diagram.pdf)
+![Link Text](diagrams/Data_Warehouse_Diagram.pdf)
 
 #### Source Database Diagram
 
 This diagram shows the structure of the source database
 
-![Alt text](diagrams/Database_Diagram.pdf)
+![Link Text](diagrams/Database_Diagram.pdf)
