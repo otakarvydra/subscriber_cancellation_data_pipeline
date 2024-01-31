@@ -43,10 +43,10 @@ The students dimension never changes, therefore it is considered to be SCD of ty
 
 The Warehouse structure is shown below
 
-![Link Text](diagrams/Data_Warehouse_Diagram.pdf)
+[Link Text](./diagrams/Data_Warehouse_Diagram.pdf)
 
 #### Source Database Diagram
 
 This diagram shows the structure of the source database
 
-![Link Text](diagrams/Database_Diagram.pdf)
+[Link Text](./diagrams/Database_Diagram.pdf)
